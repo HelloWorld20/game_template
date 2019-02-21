@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5",
+      "allowJs": true,
+      "types" : ["node"],
+      "paths": {
+        "@": ["src/*"],
+        "imgs": ["src/assets/imgs"]
+      },
+      "baseUrl": "./"
+    },
+    "include": [
+      "./src/*"
+    ],
+    "exclude": [
+      "./node_modules"
+    ]
+}

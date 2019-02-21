@@ -5,36 +5,50 @@
             <div class="preload-top"></div>
         </section>
         <i></i>
-        <vue-preload @percentage="percentage" @loaded="loaded"></vue-preload>
     </section>
 
 </template>
 
 <script>
-    import { bus } from '@/config/util'
-    import Preload from '@/config/preload';
-    import config from '@/config/config';
-    export default {
-        created() {
-            let preload = new Preload(config, this.percentage, this.loaded);
-            preload.init();
-            // bus.musicList.bgm = new Howl({
-            //     src: [require('@/assets/audios/bgm.mp3')],
-            //     loop: true
-            // });
-            // bus.musicList.click = new Howl({
-            //     src: [require('@/assets/audios/click.mp3')]
-            // })
-        },
-        methods: {
-            percentage(data) {
+import { bus } from '@/config/utils';
+import Preload from '@/config/preload';
+import config from '@/config/config';
+import { setTimeout } from 'timers';
 
-            },
-            loaded() {
+export default {
+	data() {
+		return {
+			progress: 0,
+		};
+	},
+	created() {
+		const preload = new Preload(config, this.percentage, this.loaded);
+		preload.init();
 
-            }
-        }
-    };
+		// setTimeout(() => {
+		// 	this.loaded();
+		// }, 3000);
+        // bus.musicList.bgm = new Howl({
+        //     src: [require('@/assets/audios/bgm.mp3')],
+        //     loop: true
+        // });
+        // bus.musicList.click = new Howl({
+        //     src: [require('@/assets/audios/click.mp3')]
+        // })
+	},
+	methods: {
+		percentage(data) {
+			this.progress = parseInt(data * 100, 10);
+		},
+		loaded() {
+			setTimeout(() => {
+				this.$router.replace('Home');
+			}, 1000);
+			// console.log('loaded');
+			// this.$router.replace('Home');
+		},
+	},
+};
 
 </script>
 
